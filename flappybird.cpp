@@ -6,7 +6,6 @@
 #include <random>
 
 
-
 class Game
 {
 private:
@@ -366,7 +365,7 @@ int main()
     text.setPosition(30,15);
     text.setFont(font);
 
-    ep_rate.setString("Epsilon: " + std::to_string(epsilon));
+    //ep_rate.setString("Epsilon: " + std::to_string(epsilon));
     ep_rate.setCharacterSize(24);
     ep_rate.setFillColor(sf::Color::Black);
     ep_rate.setPosition(30,35);
@@ -391,7 +390,12 @@ int main()
         if (bird.y < pipe.closest_pipe[1] && bird.x + bird.sprite.getGlobalBounds().width > pipe.closest_pipe[0] - pipe.pipex2B.getGlobalBounds().width && bird.x < pipe.closest_pipe[0] || bird.y < 0 || bird.y > 640 || bird.y + bird.sprite.getGlobalBounds().height > pipe.closest_pipe[2] && bird.x + bird.sprite.getGlobalBounds().width > pipe.closest_pipe[0] - pipe.pipex2B.getGlobalBounds().width && bird.x < pipe.closest_pipe[0]){
             bird.reset();
             pipe.reset();
+            score = 0;
         }
+
+        if (pipe.closest_pipe[0] - pipe.pipex1U.getGlobalBounds().width <= 0.02f){               
+                score += 1;  
+           }
 
         // MOVE ENVIRONMENT
         bird.fly(0);
@@ -402,7 +406,7 @@ int main()
 
         //DRAW
         text.setString("Score: " + std::to_string(score));
-        ep_rate.setString("Epsilon: " + std::to_string(epsilon));
+        //ep_rate.setString("Epsilon: " + std::to_string(epsilon));
         window.clear();
         Background.draw(window);
         Background2.draw(window);
